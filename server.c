@@ -26,8 +26,8 @@ void	print_number(int num)
 
 void	ft_to_receve(int signal)
 {
-	static int				i;
-	static unsigned char	bit;
+	static int				i = 0;
+	static unsigned char	bit = 0;
 
 	if (signal == SIGUSR2)
 		bit = (bit << 1);
@@ -54,6 +54,7 @@ int	main(void)
 	{	
 		signal(SIGUSR1, ft_to_receve);
 		signal(SIGUSR2, ft_to_receve);
+		pause();
 	}
 	return (0);
 }

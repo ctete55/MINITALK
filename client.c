@@ -37,14 +37,14 @@ void	send_bits(int pid_server, unsigned char c)
 	int	i;
 
 	i = 0;
-	while (i < 8)
+	while (i <= 7)
 	{
 		if (c << i & 0b10000000)
 			kill(pid_server, SIGUSR1);
 		else
 			kill(pid_server, SIGUSR2);
+		usleep(9000);
 		i++;
-		usleep(100);
 	}
 }
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 		{
 			send_bits(pid, argv[2][i]);
 			i++;
-		}		
+		}
 	}
 	else
 		write(1, "\033[90m dados inválidos cadete...\033[0m\n", 38);
