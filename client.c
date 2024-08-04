@@ -43,9 +43,16 @@ void	send_bits(int pid_server, unsigned char c)
 			kill(pid_server, SIGUSR1);
 		else
 			kill(pid_server, SIGUSR2);
-		usleep(9000);
+		usleep(500);
 		i++;
 	}
+}
+
+int	is_number(int n)
+{
+	if (n > 0)
+		return (1);
+	return (-1);
 }
 
 int	main(int argc, char **argv)
@@ -57,6 +64,11 @@ int	main(int argc, char **argv)
 	{
 		i = 0;
 		pid = ft_atoi(argv[1]);
+		if (is_number(pid) == -1)
+		{
+			write(1, "lamento.... PID só aceita números \n", 37);
+			return (0);
+		}
 		while (argv[2][i] != '\0')
 		{
 			send_bits(pid, argv[2][i]);
